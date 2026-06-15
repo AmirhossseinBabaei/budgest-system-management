@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('savings', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('users')->on('id');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->date('from_date');
             $table->date('to_date');

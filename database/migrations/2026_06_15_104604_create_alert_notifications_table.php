@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('predications', function (Blueprint $table) {
+        Schema::create('alert_notifications', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('users')->on('id');
-
-            $table->enum('type', ['cost', 'income', 'target', 'saving'])->default('cost');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('alert_id')->constrained()->cascadeOnDelete();
 
             $table->string('name');
-            $table->text('description');
+
+            $table->boolean('is_seen')->default(false);
 
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('predications');
+        Schema::dropIfExists('notifications');
     }
 };

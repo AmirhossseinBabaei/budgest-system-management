@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
+            $table->enum('status', ['pending', 'paid', 'rejected', 'expired'])->default('pending');
+
+            $table->string('name');
+            $table->text('description');
+
+            $table->integer('amount')->default(0);
+
             $table->timestamps();
         });
     }

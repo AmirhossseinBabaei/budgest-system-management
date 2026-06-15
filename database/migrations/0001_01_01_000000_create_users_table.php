@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->string('phone', 20);
-            $table->string('avatar_src');
+            $table->string('avatar_src')->default();
             $table->string('job')->default('programmer');
 
             $table->timestamp('phone_verified_at')->nullable();
