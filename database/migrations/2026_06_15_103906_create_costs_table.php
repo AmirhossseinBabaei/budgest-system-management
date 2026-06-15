@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('costs', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('users')->on('id');
+
+            $table->integer('price');
+            $table->text('description');
+
+            $table->date('date')->default('2026-01-01');
+
             $table->timestamps();
         });
     }
