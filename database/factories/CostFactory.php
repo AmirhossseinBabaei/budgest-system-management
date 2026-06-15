@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class CostFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::query()->inRandomOrder()->value('id'),
+            'price' => fake()->numberBetween(10000, 1000000),
+            'description' => fake()->text(150),
+            'cost_at' => Carbon::now()->format('Y-m-d H:i:s')
         ];
     }
 }

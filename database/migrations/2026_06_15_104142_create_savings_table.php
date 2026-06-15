@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('from_date');
             $table->date('to_date');
 
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->integer('amount');
 

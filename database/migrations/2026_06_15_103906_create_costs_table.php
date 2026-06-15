@@ -19,8 +19,7 @@ return new class extends Migration
             $table->integer('price');
             $table->text('description');
 
-            $table->date('cost_at')->useCurrent();
-
+            $table->timestamp('cost_at')->useCurrent();
             $table->timestamps();
         });
     }

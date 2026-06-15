@@ -19,7 +19,9 @@ return new class extends Migration
             $table->enum('type', ['cost', 'income', 'target', 'saving'])->default('cost');
 
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
+
+            $table->integer('amount');
 
             $table->timestamps();
         });

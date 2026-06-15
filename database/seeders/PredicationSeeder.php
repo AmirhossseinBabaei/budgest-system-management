@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Predication;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PredicationSeeder extends Seeder
 {
@@ -12,6 +13,18 @@ class PredicationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $this->command->info('Generating 10000 predictions...');
+
+        $predictions = Predication::factory()
+            ->count(100)
+            ->make();
+
+        $chunks = $predictions->chunk(10);
+
+        foreach ($chunks as $chunk) {
+            DB::table('predictions')->insert($chunk->toArray());
+        }
+
+        $this->command->info('10000 predictions generated successfully.');
     }
 }

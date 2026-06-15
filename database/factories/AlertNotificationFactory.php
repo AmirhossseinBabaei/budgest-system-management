@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Alert;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Saving>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AlertNotification>
  */
-class SavingFactory extends Factory
+class AlertNotificationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,10 +20,9 @@ class SavingFactory extends Factory
     {
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
-            'from_date' => fake()->date(),
-            'to_date' => fake()->date(),
-            'description' => fake()->optional()->text(100),
-            'amount' => fake()->numberBetween(100000, 5000000),
+            'alert_id' => Alert::query()->inRandomOrder()->value('id'),
+            'name' => fake()->sentence(3),
+            'is_seen' => fake()->boolean(),
         ];
     }
 }
