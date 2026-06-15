@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('targets', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('users')->on('id');
+
+            $table->string('name');
+            $table->text('description');
+
+            $table->enum('status', ['pending', 'confirmed', 'error', 'expired']);
+
+            $table->date('target_date');
+            $table->integer('amount')->default(1000);
+
             $table->timestamps();
         });
     }
