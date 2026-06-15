@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('alert_id');
+
+            $table->foreign('user_id')->references('users')->on('id');
+            $table->foreign('alert_id')->references('alerts')->on('id');
+
+            $table->string('name');
+
+            $table->boolean('is_sean')->default(false);
+
             $table->timestamps();
         });
     }
