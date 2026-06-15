@@ -11,8 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incoms', function (Blueprint $table) {
+        Schema::create('incomes', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('users')->on('id');
+
+            $table->integer('price')->default(0);
+
+            $table->date('from_date');
+            $table->date('to_date');
+
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }
