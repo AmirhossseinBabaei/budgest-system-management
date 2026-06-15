@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('predications', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('users')->on('id');
+
+            $table->enum('type', ['cost', 'income', 'target', 'saving'])->default('cost');
+
+            $table->string('name');
+            $table->text('description');
+
             $table->timestamps();
         });
     }
