@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('savings', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('users')->on('id');
+
+            $table->date('from_date');
+            $table->date('to_date');
+
+            $table->text('description');
+
+            $table->integer('amount');
+
             $table->timestamps();
         });
     }
