@@ -5,14 +5,19 @@ declare(strict_types=1);
 namespace App\Repositories\Classes;
 use App\Repositories\Interfaces\RepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 final class UserRepository implements RepositoryInterface
 {
     protected string $table = 'users';
 
-    public function insert(array $data): object
+    public function insert(array $data): array
     {
-        return (object)DB::table($this->table)->insert($data);
+        $data['password'] = Hash::make($data['password']);
+        $id = DB::table($this->table)->insertGetId($data);
+        $data['id'] = $id;
+
+        return $data;
     }
 
     public function getOneById(int $id): object|null
@@ -41,6 +46,6 @@ final class UserRepository implements RepositoryInterface
     {
         return DB::table($this->table)
             ->where($column, $value)
-            ->first();
+            ->firstOrFail();
     }
 }

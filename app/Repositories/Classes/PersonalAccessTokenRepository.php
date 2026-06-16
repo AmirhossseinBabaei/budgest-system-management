@@ -12,19 +12,22 @@ class PersonalAccessTokenRepository implements RepositoryInterface
 {
     protected string $table = 'personal_access_tokens';
 
-    public function insert(array $data): object
+    public function insert(array $data): array
     {
         $hashedToken = hash('sha256', Str::random(40));
 
-        return (object)DB::table($this->table)->insert([
+        DB::table($this->table)->insert([
             'tokenable_type' => 'App\Models\User',
-            'tokenable_id' => $data->userId ?? 1,
+            'tokenable_id' => $data['userId'] ?? 1,
             'name' => 'auth_token',
             'token' => $hashedToken,
             'abilities' => json_encode(['*']),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $data['plain_text_token'] = $hashedToken;
+
+        return $data;
     }
 
     public function getOneById(int $id): object|null
@@ -47,11 +50,18 @@ class PersonalAccessTokenRepository implements RepositoryInterface
         return DB::table($this->table)->paginate($paginate);
     }
 
-    public function deleteByTokenTypeAndUserId(int $userId, ?string $tokenType = 'App\Models\User'): bool
+    public function deleteByTokenTypeAndUserId(int $userId, string $tokenType = 'App\Models\User'): bool
     {
         return (bool)DB::table($this->table)
             ->where('tokenable_type', $tokenType)
             ->where('tokenable_id', $userId)
             ->delete();
+    }
+
+    public function getOneByColumn($column, $value): object|null
+    {
+        return DB::table($this->table)
+            ->where($column, $value)
+            ->first();
     }
 }

@@ -19,11 +19,13 @@ class SanctumController extends Controller
     {
     }
 
-    public function RegisterUser(RegisterRequest $request)
+    public function registerUser(RegisterRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->toArray();
         $userData = $this->userRepository->insert($data);
-        $token = $this->personalAccessTokenRepository->insert($userData['id']);
+
+        $token = $this->personalAccessTokenRepository->insert($userData);
+
         $textToken = $token['plain_text_token'];
 
         if (null == $userData['id']) {
@@ -36,24 +38,25 @@ class SanctumController extends Controller
         return response()->json([
             'message' => __('ResponseMessages.auth.registerSuccessfully'),
             'user' => $userData,
-            'token' => $token
+            'token' => $token['plain_text_token']
         ], StatusCode::OK->value);
     }
 
-    public function LoginUser(LoginRequest $request)
+    public function loginUser(LoginRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->toArray();
 
         $user = $this->userRepository->getOneByColumn('phone', $data['phone']);
 
-        if ($user && Hash::check($data['password'], $user['password'])) {
-            $this->personalAccessTokenRepository->deleteByTokenTypeAndUserId($user['id']);
-            $token = $this->personalAccessTokenRepository->insert($user['id']);
+        if ($user && Hash::check($data['password'], $user->password)) {
+            $this->personalAccessTokenRepository->deleteByTokenTypeAndUserId($user->id);
+
+            $token = $this->personalAccessTokenRepository->insert((array)$user);
 
             return response()->json([
-                'message' => __('ResponseMessages.auth.registerSuccessfully'),
+                'message' => __('ResponseMessages.auth.loginSuccessfully'),
                 'user' => $user,
-                'token' => $token
+                'token' => $token['plain_text_token']
             ], StatusCode::OK->value);
         }
 
