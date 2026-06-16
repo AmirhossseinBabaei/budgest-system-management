@@ -21,30 +21,3 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-/resources/react/PaneladminShop-React-Js/node_modules
-
-
-# Logs
-/resources/react/PaneladminShop-React-Js/logs
-/resources/react/PaneladminShop-React-Js/*.log
-/resources/react/PaneladminShop-React-Js/npm-debug.log*
-/resources/react/PaneladminShop-React-Js/yarn-debug.log*
-yarn-error.log*
-/resources/react/PaneladminShop-React-Js/pnpm-debug.log*
-/resources/react/PaneladminShop-React-Js/lerna-debug.log*
-
-/resources/react/PaneladminShop-React-Js/node_modules
-/resources/react/PaneladminShop-React-Js/dist
-/resources/react/PaneladminShop-React-Js/dist-ssr
-/resources/react/PaneladminShop-React-Js/*.local
-
-# Editor directories and files
-/resources/react/PaneladminShop-React-Js/.vscode/*
-/resources/react/PaneladminShop-React-Js/!.vscode/extensions.json
-/resources/react/PaneladminShop-React-Js/.idea
-/resources/react/PaneladminShop-React-Js/.DS_Store
-/resources/react/PaneladminShop-React-Js/*.suo
-/resources/react/PaneladminShop-React-Js/.ntvs*
-*/resources/react/PaneladminShop-React-Js/.njsproj
-/resources/react/PaneladminShop-React-Js/*.sln
-/resources/react/PaneladminShop-React-Js/*.sw?
