@@ -1,0 +1,30 @@
+@import "tailwindcss";
+/* @import url('./assets/styles/Font.css'); */
+
+@theme {
+    --color-background: var(--background);
+    --color-Primary: var(--Primary);
+    --color-Secondary: var(--Secondary);
+    --color-ColorBorder: var(--border);
+    --color-PrimaryHover:var(--primary-hover);
+}
+
+:root {
+    --background: #f8fafc;
+    --Primary: #2563eb;
+    --Secondary: #475569;
+    --border: #e2e8f0;
+    --primary-hover:#1D4ED8;
+}
+.dark {
+    --background: #0f172a;
+    --Primary: #3b82f6;
+    --Secondary: #CBD5E1;
+    --border: #334155;
+    --primary-hover:#2563EB;
+}
+
+body {
+    /* font-family: "Vazir"; */
+    direction: rtl;
+}
