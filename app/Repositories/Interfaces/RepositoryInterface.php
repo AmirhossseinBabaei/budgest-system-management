@@ -6,7 +6,7 @@ namespace App\Repositories\Interfaces;
 
 interface RepositoryInterface
 {
-    public function insert(array $data): object;
+    public function insert(array $data): array;
 
     public function getOneById(int $id): object|null;
 
