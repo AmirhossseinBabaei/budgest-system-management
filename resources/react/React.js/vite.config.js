@@ -10,7 +10,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@images': path.resolve(__dirname, './src/assets/images'),
-      "@fonts" :path.resolve(__dirname , './src/assests/Fonts')
-    }
+      "@fonts" :path.resolve(__dirname , './src/assets/Fonts'),
+      "@components" :path.resolve(__dirname , './src/Components')
+    },
   }
 })
